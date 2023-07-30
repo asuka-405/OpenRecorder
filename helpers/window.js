@@ -1,10 +1,10 @@
 const { BrowserWindow } = require("electron")
 const path = require("path")
 
-const createWindow = (file) => {
+const createWindow = (file, { width, height }) => {
   const window = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width,
+    height,
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: true,
