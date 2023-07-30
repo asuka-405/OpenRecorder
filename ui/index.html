@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' file:;"
+    />
+    <script src="./scripts/renderer.js" defer></script>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="wrapper" id="all-content-wrapper">
+      <video class="capture-display" id="capture-display" autoplay loop>
+        <source src="./assets/random_noice.mp4" type="video/mp4" />
+      </video>
+      <button class="btn" id="btn-sel-src">Select source</button>
+      <button class="btn" id="btn-play-pause">
+        <span class="text" id="text">Start Recording</span>
+        <img src="./assets/play.svg" alt="play" />
+      </button>
+    </main>
+  </body>
+</html>
