@@ -12,13 +12,13 @@ contextBridge.exposeInMainWorld("electron", {
       return ipcRenderer.invoke("show-dialog", type, options)
     },
   },
-  blob: {
-    save: (arrayBuffer) => {
-      ipcRenderer.send("save-blob", {
-        data: Array.from(new Uint8Array(arrayBuffer)),
-        type: arrayBuffer.type,
-      })
+  buffer: {
+    from: (data, encoding) => {
+      return Buffer.from(data, encoding)
     },
+  },
+  sync: {
+    writeFile: (path, data) => writeFileSync(path, data),
   },
 })
 
@@ -27,4 +27,12 @@ ipcRenderer.on("src-selected", (e, source) => {
   selectBtn.textContent = source.name
   source.type = "screen-src"
   window.postMessage(JSON.stringify(source), "*")
+})
+
+ipcRenderer.on("path-chosen", (e, path) => {
+  path = {
+    type: "chosen-path",
+    path,
+  }
+  window.postMessage(JSON.stringify(path), "*")
 })

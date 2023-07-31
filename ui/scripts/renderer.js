@@ -1,4 +1,4 @@
-const { capture, dialog, blob } = window.electron
+const { capture, dialog, buffer, sync } = window.electron
 
 const videoDisplay = document.querySelector("#capture-display")
 const selectBtn = document.querySelector("#btn-sel-src")
@@ -7,6 +7,9 @@ let source
 let recording = false
 let mediaRecorder
 const recordedChunks = []
+const curBuffer = {
+  buffer: undefined,
+}
 
 window.onmessage = async (e) => {
   if (e.source === window) {
@@ -39,6 +42,8 @@ window.onmessage = async (e) => {
       videoDisplay.srcObject = stream
       videoDisplay.muted = true
       videoDisplay.play()
+    } else if (data.type === "chosen-path") {
+      sync.writeFile(data.path, curBuffer.buffer)
     }
   }
 }
@@ -65,13 +70,15 @@ recordBtn.addEventListener("click", () => {
 })
 
 function handleDataAvailable(e) {
-  console.log("started")
   recordedChunks.push(e.data)
 }
 async function handleStop(e) {
-  const arrayBuffer = new Blob(recordedChunks, {
-    type: "video/webm; codecs=vp9",
-  }).arrayBuffer()
-
-  blob.save(arrayBuffer)
+  const cur = await buffer.from(
+    await new Blob(recordedChunks, {
+      type: "video/webm; codecs=vp9",
+    }).arrayBuffer()
+  )
+  curBuffer.buffer = cur
+  dialog.show("save-recording")
+  recordedChunks.splice(0, recordedChunks.length)
 }
