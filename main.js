@@ -4,12 +4,16 @@ const { createWindow } = require("./helpers/window")
 const { writeFileSync } = require("fs")
 
 app.whenReady().then(() => {
-  window = createWindow(path.join(__dirname, "ui", "index.html"), {
-    width: 1900,
-    height: 1000,
-  })
+  window = createWindow(
+    path.join(__dirname, "ui", "index.html"),
+    {
+      width: 1900,
+      height: 1000,
+    },
+    path.join(__dirname, "icon.ico")
+  )
 
-  window.webContents.openDevTools()
+  // window.webContents.openDevTools()
 
   ipcMain.handle("show-dialog", async (e, type, options) => {
     if (type === "no-src-record") {
