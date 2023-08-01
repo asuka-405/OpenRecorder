@@ -17,13 +17,9 @@ jobs:
         run: npm install yarn && yarn install
       - name: Build
         run: yarn build
-      - name: make build directory
-        run: mkdir build
-      - name: build info
-        run: echo "##Open Recorder v1_${{ steps.get_date.outputs.date }} - download the executable here" | Out-File -FilePath build/build.md
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build
-          retention-days: 365
+          name: ORv1
+          path: out/make
+          retention-days: 90
