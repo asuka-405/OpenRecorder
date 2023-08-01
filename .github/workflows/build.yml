@@ -14,12 +14,15 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: yarn install
+        run: npm install yarn && yarn install
       - name: Build
         run: yarn build
+      - name: make build directory
+        run: mkdir build
+        run: echo "Open Recorder v1 - download the executable here" | Out-File -FilePath build/build.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: build
+          path: build/ORv1.exe
           retention-days: 365
