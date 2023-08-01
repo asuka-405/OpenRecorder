@@ -7,20 +7,32 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self' file:;"
     />
+    <script src="./scripts/mediaFormats.js"></script>
     <script src="./scripts/renderer.js" defer></script>
     <link rel="stylesheet" href="./styles/index.css" />
     <title>Document</title>
   </head>
   <body>
+    <aside class="title-bar" id="title-bar">
+      <span class="title" id="title">OpenRecorderV1</span
+      ><span class="window-state-btn-grp" id="window-state-btn-grp"
+        ><button class="title-bar-btn" id="close">X</button>
+        <button class="title-bar-btn" id="close">-</button></span
+      >
+    </aside>
     <main class="wrapper" id="all-content-wrapper">
       <video class="capture-display" id="capture-display" autoplay loop>
         <source src="./assets/random_noice.mp4" type="video/mp4" />
       </video>
-      <button class="btn" id="btn-sel-src">Select source</button>
-      <button class="btn" id="btn-play-pause">
-        <span class="text" id="text">Start Recording</span>
-        <img src="./assets/play.svg" alt="play" />
-      </button>
+      <span class="timer" id="timer">00:00:00:00</span>
+      <div>
+        <button class="btn" id="btn-sel-file-type">Save file type</button>
+        <button class="btn" id="btn-sel-src">Select source</button>
+        <button class="btn" id="btn-play-pause">
+          <span class="text" id="text">Start Recording</span>
+          <img src="./assets/play.svg" alt="play" />
+        </button>
+      </div>
     </main>
   </body>
 </html>

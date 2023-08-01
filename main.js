@@ -13,7 +13,7 @@ app.whenReady().then(() => {
     path.join(__dirname, "icon.ico")
   )
 
-  // window.webContents.openDevTools()
+  window.webContents.openDevTools()
 
   ipcMain.handle("show-dialog", async (e, type, options) => {
     if (type === "no-src-record") {
@@ -26,10 +26,10 @@ app.whenReady().then(() => {
         .showSaveDialog({
           title: "Save Video",
           buttonLabel: "save",
-          defaultPath: `openrecorder-${Date.now()}.webm`,
+          defaultPath: `openrecorder-${Date.now()}.${options}`,
           filters: {
-            name: "WebM Files",
-            extentions: ["webm"],
+            name: `${options} Files`,
+            extentions: [options],
           },
         })
         .then((selected) => {
@@ -37,6 +37,18 @@ app.whenReady().then(() => {
           window.webContents.send("path-chosen", selected.filePath)
         })
     }
+  })
+
+  ipcMain.handle("select-mime", (e, mediaFormats) => {
+    const mimeMenu = Menu.buildFromTemplate(
+      mediaFormats.map((format) => {
+        return {
+          label: format.description,
+          click: () => window.webContents.send("mime-chosen", format),
+        }
+      })
+    )
+    mimeMenu.popup()
   })
 
   ipcMain.handle("get-capture-src", async () => {

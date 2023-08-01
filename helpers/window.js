@@ -10,7 +10,7 @@ const createWindow = (file, { width, height }, icon) => {
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js"),
       icon,
-      devTools: false,
+      // devTools: false,
     },
     // frame: false,
   })

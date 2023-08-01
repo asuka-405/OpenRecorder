@@ -20,6 +20,7 @@ contextBridge.exposeInMainWorld("electron", {
   sync: {
     writeFile: (path, data) => writeFileSync(path, data),
   },
+  openMenu: (type, items) => ipcRenderer.invoke(type, items),
 })
 
 ipcRenderer.on("src-selected", (e, source) => {
@@ -35,4 +36,12 @@ ipcRenderer.on("path-chosen", (e, path) => {
     path,
   }
   window.postMessage(JSON.stringify(path), "*")
+})
+
+ipcRenderer.on("mime-chosen", (e, format) => {
+  format = {
+    type: "chosen-format",
+    ...format,
+  }
+  window.postMessage(JSON.stringify(format))
 })

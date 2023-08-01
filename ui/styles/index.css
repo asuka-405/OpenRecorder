@@ -5,6 +5,63 @@
   transition: all 0.1s ease-in-out;
 }
 
+.title-bar {
+  padding: 1em;
+  width: 100%;
+  height: 60px;
+  background-color: #1f1f1f;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  box-shadow: 0 0 20px rgba(255, 99, 71, 0.9019607843);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.title-bar .title,
+.title-bar .window-state-btn-grp {
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 1em;
+}
+.title-bar .title {
+  top: 1.5em;
+  left: 1em;
+}
+.title-bar .window-state-btn-grp {
+  right: 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+.title-bar .timer {
+  position: absolute;
+  top: 1.5em;
+  right: 1em;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: rgba(255, 99, 71, 0.9019607843);
+}
+.title-bar-btn {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 99, 71, 0.9019607843);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+.title-bar-btn:hover {
+  background-color: transparent;
+  border: 1px solid tomato;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -22,13 +79,13 @@
 .wrapper #capture-display {
   max-width: 500px;
   aspect-ratio: 16/9;
-  box-shadow: 0 0 20px rgba(255, 99, 71, 0.9);
+  box-shadow: 0 0 20px rgba(255, 99, 71, 0.9019607843);
   border-radius: 10px;
 }
 .wrapper .btn {
   width: 250px;
   height: 50px;
-  background-color: rgba(255, 99, 71, 0.9);
+  background-color: rgba(255, 99, 71, 0.9019607843);
   border: none;
   color: #fff;
   font-size: 16px;
@@ -46,4 +103,12 @@
 .wrapper .btn img {
   width: 30px;
   height: 30px;
+}
+.wrapper #btn-sel-file-type {
+  position: absolute;
+  top: 8em;
+  right: 5em;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 2em 1em;
 }/*# sourceMappingURL=index.css.map */
