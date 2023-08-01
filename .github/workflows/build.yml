@@ -19,7 +19,8 @@ jobs:
         run: yarn build
       - name: make build directory
         run: mkdir build
-        run: echo "##Open Recorder v1 - download the executable here" | Out-File -FilePath build/build.md
+      - name: build info
+        run: echo "##Open Recorder v1_${{ steps.get_date.outputs.date }} - download the executable here" | Out-File -FilePath build/build.md
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
