@@ -25,5 +25,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: build/ORv1.exe
+          path: build
           retention-days: 365
